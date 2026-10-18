@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>下一个玩什么</title>
+  </head>
+  <body>
+    <main class="app">
+      <header class="app__header">
+        <p class="app__eyebrow">nextGame</p>
+        <h1 class="app__title">下一个玩什么</h1>
+        <p class="app__subtitle">按你最近的游玩口味，从你自己的库里挑一款</p>
+      </header>
+
+      <section class="source source--pending" data-testid="data-source">
+        <span class="source__badge" data-testid="source-badge">读取中</span>
+        <p class="source__detail" data-testid="source-detail">正在读取你的 Steam 游戏库…</p>
+      </section>
+      <p class="probe" data-testid="probe-note" hidden></p>
+
+      <section class="state" data-testid="state-loading">
+        <span class="spinner" aria-hidden="true"></span>
+        <p data-testid="loading-text">正在分析你的游戏库…</p>
+      </section>
+
+      <section class="state state--error" data-testid="state-error" hidden>
+        <p class="state__title" data-testid="error-title">没能算出推荐</p>
+        <p class="state__detail" data-testid="error-detail"></p>
+        <div class="actions">
+          <button type="button" class="button" data-testid="retry-button">重试</button>
+          <button type="button" class="button button--ghost" data-testid="reload-button" hidden>重新加载页面</button>
+        </div>
+      </section>
+
+      <section class="result" data-testid="result" hidden>
+        <article class="pick" data-testid="pick">
+          <div class="pick__cover" data-testid="pick-cover" aria-hidden="true">
+            <span class="pick__initial" data-testid="pick-initial"></span>
+          </div>
+          <div class="pick__body">
+            <p class="pick__headline" data-testid="pick-headline"></p>
+            <h2 class="pick__name" data-testid="pick-name"></h2>
+            <ul class="pick__tags" data-testid="pick-tags"></ul>
+            <p class="pick__meta" data-testid="pick-meta"></p>
+            <ul class="pick__reasons" data-testid="pick-reasons"></ul>
+            <button type="button" class="pick__action" data-testid="open-detail-button">在小黑盒看游戏详情</button>
+          </div>
+        </article>
+
+        <!-- 两个面板都默认展开；点标题可收起。用原生 details，折叠状态由浏览器维护 -->
+        <details class="panel panel--fold" data-testid="score-panel" open>
+          <summary class="panel__summary">打分构成</summary>
+          <p class="panel__hint">最终得分 = 口味契合度 × 0.7 + 候选池加成 × 0.3</p>
+          <ul class="bars" data-testid="score-bars"></ul>
+        </details>
+
+        <details class="panel panel--fold" data-testid="profile-panel" open>
+          <summary class="panel__summary">你的口味画像</summary>
+          <p class="panel__hint" data-testid="profile-hint"></p>
+          <ul class="bars" data-testid="profile-bars"></ul>
+        </details>
+
+        <div class="actions actions--dock" data-testid="action-dock">
+          <button type="button" class="button" data-testid="reroll-button">换一个</button>
+          <button type="button" class="button button--ghost" data-testid="random-button">纯随机</button>
+        </div>
+      </section>
+
+      <!-- 诊断默认收起，且只在开发运行时显示（正式版由 JS 保持 hidden） -->
+      <details class="panel panel--fold" data-testid="diag-panel" hidden>
+        <summary class="panel__summary">诊断信息</summary>
+        <p class="panel__hint">
+          真机上看不到控制台。这里显示客户端版本、小黑盒登录态、Steam 绑定状态，以及每次读取游戏库请求的耗时与错误码。
+        </p>
+        <dl class="diag" data-testid="diag-list"></dl>
+        <ul class="diag-probe" data-testid="query-probe-results"></ul>
+        <div class="actions">
+          <button type="button" class="button button--ghost" data-testid="query-probe-button">
+            重测 Steam 库查询
+          </button>
+        </div>
+      </details>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

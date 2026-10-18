@@ -1,0 +1,47 @@
+{
+  "name": "heibox-next-game",
+  "version": "0.1.2",
+  "private": true,
+  "type": "module",
+  "heybox": {
+    "miniProgramId": "01a142f6-12ef-788b-ab26-cf4e50511261",
+    "name": "下一个玩什么",
+    "desc": "按你最近两周的游玩口味，从你自己绑定的 Steam 库里挑一款下一个玩什么。",
+    "category": "tool",
+    "icon": "assets/icon.png",
+    "coverImages": [
+      "assets/cover.png"
+    ],
+    "platforms": [
+      "android",
+      "ios",
+      "ohos",
+      "windows",
+      "macos"
+    ],
+    "permissions": {
+      "steamLibrary": {
+        "enabled": true
+      }
+    }
+  },
+  "scripts": {
+    "hb-sdk": "hb-sdk",
+    "dev": "hb-sdk dev",
+    "build": "hb-sdk build",
+    "deploy": "hb-sdk remote deploy",
+    "check": "node scripts/check-recommend.mjs",
+    "check:library": "node scripts/check-library-retry.mjs",
+    "check:all": "node scripts/check-recommend.mjs && node scripts/check-library-retry.mjs",
+    "build:seed": "node --use-system-ca scripts/build-appid-seed.mjs",
+    "build:metadata": "node --use-system-ca scripts/build-game-metadata.mjs",
+    "probe": "node scripts/probe-host-payload.mjs",
+    "verify": "node scripts/verify-browser-mock.mjs"
+  },
+  "dependencies": {
+    "@heybox/hb-sdk": "^0.9.1"
+  },
+  "devDependencies": {
+    "vite": "^8.0.12"
+  }
+}
